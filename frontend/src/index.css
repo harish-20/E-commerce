@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root {
+  --gray: #f1f0f0;
+  --dark: #454d4a;
+  --primary: #58a0e2;
+  --primary-dark: #5093d1;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', Verdana, Geneva, Tahoma, sans-serif;
+}

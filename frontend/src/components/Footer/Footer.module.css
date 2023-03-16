@@ -1,0 +1,30 @@
+.footer {
+  width: 100%;
+}
+
+.links {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 40px 10%;
+  background-color: var(--gray);
+}
+
+.contact {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 30px 60px;
+  background-color: var(--gray);
+}
+
+@media screen and (max-width: 460px) {
+  .contact img {
+    order: 1;
+  }
+  .contact div {
+    order: 2;
+  }
+}

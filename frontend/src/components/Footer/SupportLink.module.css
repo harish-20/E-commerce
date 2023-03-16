@@ -1,0 +1,32 @@
+.link {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+}
+
+.link ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.link h4 {
+  margin-bottom: 8px;
+}
+
+.link li a {
+  color: black;
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: 0.3s;
+  border-width: 0px;
+}
+
+.link li a:hover {
+  border-bottom: 2px solid gray;
+}
+
+.link p {
+  font-size: 0.8rem;
+}

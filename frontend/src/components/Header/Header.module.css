@@ -1,0 +1,43 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: 16px;
+}
+
+.header input,
+.mob-view-input {
+  width: 65%;
+  font-size: 1.2rem;
+  padding: 0.5rem 0.7rem;
+  outline: none;
+  margin: 0px 1rem;
+  border: 2px solid gray;
+  border-radius: 5px;
+}
+
+.header input:focus,
+.header input:active,
+.mob-view-input:focus,
+.mob-view-input:active {
+  border-color: #616161;
+}
+
+.mob-view-input {
+  display: none;
+  width: 90%;
+}
+
+@media screen and (max-width: 480px) {
+  .header .logo {
+    height: 40px;
+  }
+
+  .header input {
+    display: none;
+  }
+  .mob-view-input {
+    display: block;
+  }
+}

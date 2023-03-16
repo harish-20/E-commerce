@@ -1,0 +1,25 @@
+.banner-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: auto;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 16px;
+  margin: 2rem 0;
+}
+
+.banner-container img {
+  width: 40vw;
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+  .banner-container {
+    grid-template-columns: 1fr;
+  }
+
+  .banner-container img {
+    width: 80vw;
+    margin: auto;
+  }
+}

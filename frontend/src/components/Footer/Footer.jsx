@@ -26,10 +26,10 @@ const Footer = () => {
         <SupportLink
           topic="Contact us"
           para="
-          B-11 D.S.I.D.C Complex,F.I.E
-          patparganj Industrial Area,
-          New Delhi
-          , Delhi
+          No.16 Periyasamy complex,
+            Chatram,
+          Trichy
+          , TamilNadu
            110092 , 011 4242 0976
           "
         />

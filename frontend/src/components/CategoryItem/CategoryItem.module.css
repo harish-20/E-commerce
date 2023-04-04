@@ -1,0 +1,28 @@
+.category,
+.active {
+  height: 50px;
+  background-color: var(--gray);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--dark);
+  text-decoration: none;
+  border: 2px solid var(--dark);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.active {
+  border: 2px solid var(--primary);
+  color: var(--primary);
+}
+
+.category h3,
+.active h3 {
+  font-size: 0.8rem;
+  padding: 0.4rem;
+}
+.category img,
+.active img {
+  width: 70px;
+}

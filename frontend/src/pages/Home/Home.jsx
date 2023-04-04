@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Category from '../../components/Category/Category'
 import CategoryHeading from '../../components/CategoryHeading/CategoryHeading'
 import CardContainer from '../../components/CardContainer/CardContainer'
 import DealsCard from '../../components/DealsCard/DealsCard'
@@ -28,6 +29,7 @@ const Home = () => {
 
   return (
     <div>
+      <Category />
       <CategoryHeading heading="Combo Offer" link="/" />
       <CardContainer>
         <DealsCard {...dummy} />

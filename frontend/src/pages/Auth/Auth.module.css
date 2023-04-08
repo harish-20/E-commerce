@@ -49,3 +49,9 @@
 p {
   text-align: center;
 }
+
+.actions-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}

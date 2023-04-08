@@ -94,11 +94,17 @@ const Auth = () => {
           placeholder={`Enter your ${isSignUp ? 'new' : ''} password`}
         />
 
-        <Button style={{ width: '100%' }}>{currentState}</Button>
-        <p>OR</p>
-        <Button type="sec" onClick={() => setisSignUp((prev) => !prev)}>
-          {isSignUp ? 'Log In ' : 'Sign up'}
-        </Button>
+        <div className={classes['actions-container']}>
+          <Button style={{ width: '100%' }}>{currentState}</Button>
+          <p>OR</p>
+          <Button
+            style={{ width: '100%' }}
+            type="sec"
+            onClick={() => setisSignUp((prev) => !prev)}
+          >
+            {isSignUp ? 'Log In ' : 'Sign up'}
+          </Button>
+        </div>
       </form>
     </div>
   )

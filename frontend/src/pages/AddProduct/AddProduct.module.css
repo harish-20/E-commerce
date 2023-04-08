@@ -6,19 +6,31 @@
 }
 
 .form {
+  width: 70%;
   margin: auto;
   padding: 2.4rem 5rem;
   border-radius: 8px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.579);
 }
 
-.form h2 {
-  padding: 1rem 0;
+.form h1 {
+  padding: 2rem 0;
+}
+
+@media screen and (max-width: 720px) {
+  .form {
+    width: 80%;
+    padding: 1rem 2rem;
+  }
 }
 
 @media screen and (max-width: 480px) {
   .form {
     width: 90%;
     padding: 1rem 2rem;
+  }
+  .form h1 {
+    font-size: 1.4rem;
+    padding: 1rem 0;
   }
 }

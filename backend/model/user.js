@@ -23,6 +23,7 @@ const userSchema = mongoose.Schema({
   },
   onSaleProducts: Array,
   cartItems: Array,
+  purchasedProduct: Array,
 })
 
 const User = mongoose.model('user', userSchema)

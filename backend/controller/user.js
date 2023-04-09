@@ -60,7 +60,28 @@ const signin = async (req, res) => {
   }
 }
 
+const updateUser = async (req, res) => {
+  const { _id, ...user } = req.body
+
+  try {
+    const result = await User.findByIdAndUpdate(
+      _id,
+      { $set: user },
+      { new: true },
+    )
+
+    res.status(400).send({ result, hasError: false })
+  } catch (err) {
+    res.status(400).send({
+      message: 'Cannot update user',
+      error: err.message,
+      hasError: true,
+    })
+  }
+}
+
 module.exports = {
   signup,
   signin,
+  updateUser,
 }

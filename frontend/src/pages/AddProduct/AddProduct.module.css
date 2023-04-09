@@ -24,6 +24,22 @@
   }
 }
 
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.dropdown select {
+  width: 50%;
+  font-size: 1.2rem;
+  padding: 0.2rem;
+}
+
+.dropdown select option {
+  padding: 0.2rem;
+}
+
 @media screen and (max-width: 480px) {
   .form {
     width: 90%;
@@ -32,5 +48,10 @@
   .form h1 {
     font-size: 1.4rem;
     padding: 1rem 0;
+  }
+
+  .dropdown select {
+    width: 80%;
+    font-size: 1.2rem;
   }
 }

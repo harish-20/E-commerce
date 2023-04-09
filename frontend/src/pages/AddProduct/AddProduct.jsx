@@ -9,13 +9,13 @@ const AddProduct = () => {
     name: '',
     description: '',
     image: '',
+    category: '',
     price: '',
     discount: '',
     brand: '',
   })
 
   const handleChange = (event) => {
-    console.log(event.target)
     setFormData((prev) => ({
       ...prev,
       [event.target.name]: event.target.value,
@@ -63,6 +63,27 @@ const AddProduct = () => {
           title="Product Image:"
           onChange={handleImage}
         />
+
+        <div className={classes.dropdown}>
+          <label>Product Category:</label>
+          <select
+            defaultValue="--none--"
+            name="category"
+            onChange={handleChange}
+          >
+            <option defaultValue value="">
+              --none--
+            </option>
+            <option value="laptop">Laptop</option>
+            <option value="accessories">Accesories</option>
+            <option value="camera">Camera</option>
+            <option value="tv">TV</option>
+            <option value="hometheatre">Home Theatre</option>
+            <option value="headphone">Headphone</option>
+            <option value="storage">Storage</option>
+          </select>
+        </div>
+
         {formData.image && (
           <img
             style={{ maxWidth: '100%' }}

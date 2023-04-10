@@ -7,6 +7,7 @@ const Button = (props) => {
       className={props.type === 'sec' ? classes.secondary : classes.btn}
       style={props.style}
       onClick={props.onClick}
+      type={props.inputType}
     >
       {props.children}
     </button>

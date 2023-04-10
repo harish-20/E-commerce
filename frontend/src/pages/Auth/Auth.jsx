@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import axios from 'axios'
 
 import Button from '../../components/Button/Button'
 
 import classes from './Auth.module.css'
+import { currentUserActions } from '../../redux/slices/currentUser'
 const Auth = () => {
   const [isSignUp, setisSignUp] = useState(false)
   const [formData, setFormData] = useState({
@@ -12,6 +15,7 @@ const Auth = () => {
     isSeller: null,
     password: '',
   })
+  const dispatch = useDispatch()
 
   const currentState = isSignUp ? 'Sign Up' : 'Log In'
 
@@ -29,9 +33,48 @@ const Auth = () => {
     }
   }
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault()
-    console.table(formData)
+
+    const { name, email, phoneNumber, isSeller, password } = formData
+
+    if (isSignUp) {
+      if (
+        name !== '' &&
+        email !== '' &&
+        phoneNumber !== '' &&
+        isSeller !== null &&
+        password !== ''
+      ) {
+        const result = await axios.post(
+          'http://localhost:8080/user/signup',
+          formData,
+        )
+        if (result.data.hasError) {
+          alert('Signup failed')
+        } else {
+          alert('Signup successfull.Now you can login.')
+        }
+      } else {
+        alert('Input fields should not be empty')
+      }
+    } else {
+      if (email !== '' && password !== '') {
+        const result = await axios.post('http://localhost:8080/user/signin', {
+          email,
+          password,
+        })
+        if (result.data.hasError) {
+          alert(result.message || 'Login in unsuccessfull')
+        } else {
+          const { user, token } = result.data
+          dispatch(currentUserActions.setUser({ user, token }))
+          console.log(result.data)
+        }
+      } else {
+        alert('Input fields should not be empty')
+      }
+    }
   }
   return (
     <div className={classes.container}>
@@ -95,12 +138,15 @@ const Auth = () => {
         />
 
         <div className={classes['actions-container']}>
-          <Button style={{ width: '100%' }}>{currentState}</Button>
+          <Button style={{ width: '100%' }} inputType="submit">
+            {currentState}
+          </Button>
           <p>OR</p>
           <Button
             style={{ width: '100%' }}
             type="sec"
             onClick={() => setisSignUp((prev) => !prev)}
+            inputType="button"
           >
             {isSignUp ? 'Log In ' : 'Sign up'}
           </Button>

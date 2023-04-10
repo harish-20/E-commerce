@@ -44,7 +44,7 @@ const signin = async (req, res) => {
           exsistingUser._id.toString(),
           process.env.PRIVATE_KEY,
         )
-        res.status(200).send({ token, hasError: false })
+        res.status(200).send({ token, user: exsistingUser, hasError: false })
       } else {
         res.status(400).send({ message: 'Incorrect password', hasError: true })
       }

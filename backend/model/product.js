@@ -9,6 +9,10 @@ const productSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  sellerId: {
+    type: String,
+    required: true,
+  },
   image: {
     type: String,
     required: true,
@@ -32,6 +36,9 @@ const productSchema = mongoose.Schema({
   },
   reviews: {
     type: Array,
+  },
+  totalSelled: {
+    type: Number,
   },
 })
 

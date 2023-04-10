@@ -9,8 +9,10 @@ const currentUserSlice = createSlice({
   name: 'Current User',
   initialState,
   reducers: {
-    setUser(state, payload) {
-      state = payload
+    setUser(state, action) {
+      state = action.payload
+      localStorage.setItem('userInfo', JSON.stringify(action.payload))
+      return state
     },
     resetUser() {
       state = initialState

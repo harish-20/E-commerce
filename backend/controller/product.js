@@ -14,11 +14,44 @@ const getAllProducts = async (req, res) => {
   }
 }
 
+const getProductsByCategory = async (req, res) => {
+  const { category } = req.params
+
+  try {
+    const products = await Product.find({ category })
+
+    res.status(200).send({ hasError: false, products })
+  } catch (err) {
+    res.status(400).send({
+      hasError: true,
+      error: err.message,
+      message: 'cannot get products',
+    })
+  }
+}
+
+const getProductsBySeller = async (req, res) => {
+  const { sellerId } = req.params
+
+  try {
+    const products = await Product.find({ sellerId })
+
+    res.status(200).send({ hasError: false, products })
+  } catch (err) {
+    res.status(400).send({
+      hasError: true,
+      error: err.message,
+      message: 'cannot get products',
+    })
+  }
+}
+
 const addProduct = async (req, res) => {
   const {
     name,
     description,
     category,
+    sellerId,
     image,
     price,
     discount,
@@ -30,6 +63,7 @@ const addProduct = async (req, res) => {
       name,
       description,
       category,
+      sellerId,
       image,
       price,
       discount,
@@ -65,6 +99,8 @@ const removeProduct = async (req, res) => {
 
 module.exports = {
   getAllProducts,
+  getProductsByCategory,
+  getProductsBySeller,
   addProduct,
   removeProduct,
 }

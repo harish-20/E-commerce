@@ -60,6 +60,29 @@ const signin = async (req, res) => {
   }
 }
 
+const getUser = async (req, res) => {
+  const { _id } = req.body
+  try {
+    const user = await User.findById(_id)
+
+    if (user) {
+      res.status(200).send({ hasError: false, user })
+    } else {
+      res.status(400).send({
+        message: 'Cannot get user',
+        error: err.message,
+        hasError: true,
+      })
+    }
+  } catch (err) {
+    res.status(400).send({
+      message: 'Cannot get user',
+      error: err.message,
+      hasError: true,
+    })
+  }
+}
+
 const updateUser = async (req, res) => {
   const { _id, ...user } = req.body
 
@@ -84,4 +107,5 @@ module.exports = {
   signup,
   signin,
   updateUser,
+  getUser,
 }

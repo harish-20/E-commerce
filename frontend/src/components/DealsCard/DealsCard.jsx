@@ -15,8 +15,8 @@ function DealsCard(props) {
       </div>
       <p>{props.description}</p>
       <div className={classes.price}>
-        <h4>${props.offerPrice}</h4>
-        <h4>${props.oldPrice}</h4>
+        <h4>&#8377;{props.offerPrice}</h4>
+        <h4>&#8377;{props.oldPrice}</h4>
       </div>
       <div className={classes['other-images']}>
         {props.images.slice(1, 4).map((image, index) => (

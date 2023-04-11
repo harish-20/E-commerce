@@ -26,6 +26,11 @@ const Profile = (props) => {
       <div className={classes['img-container']}>
         <img src={profile} alt="profile" />
       </div>
+      {props.user.isSeller && (
+        <div>
+          <p>(Seller)</p>
+        </div>
+      )}
       <div>
         <h3>Name</h3>
         <p>{props.user.name}</p>

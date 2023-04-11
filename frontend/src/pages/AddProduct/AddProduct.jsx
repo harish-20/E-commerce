@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 
 import InputElement from '../../components/InputElement/InputElement'
 import Button from '../../components/Button/Button'
 
 import classes from './AddProduct.module.css'
+import { useSelector } from 'react-redux'
 const AddProduct = () => {
+  const currentUser = useSelector((state) => state.currentUser.user)
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -35,8 +38,21 @@ const AddProduct = () => {
     }
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
+    const formatedFormData = { ...formData, sellerId: currentUser._id }
+    for (let key in formatedFormData) {
+      if (formData[key] === '') {
+        alert('Fill all the input in the form')
+        return
+      }
+    }
+
+    const result = await axios.post(
+      'http://localhost:8080/product/addProduct',
+      formatedFormData,
+    )
+    console.log(result)
   }
   return (
     <div className={classes['form-container']}>
@@ -64,6 +80,14 @@ const AddProduct = () => {
           onChange={handleImage}
         />
 
+        {formData.image && (
+          <img
+            style={{ maxWidth: '100%' }}
+            src={formData.image}
+            alt="product"
+          />
+        )}
+
         <div className={classes.dropdown}>
           <label>Product Category:</label>
           <select
@@ -83,14 +107,6 @@ const AddProduct = () => {
             <option value="storage">Storage</option>
           </select>
         </div>
-
-        {formData.image && (
-          <img
-            style={{ maxWidth: '100%' }}
-            src={formData.image}
-            alt="product"
-          />
-        )}
 
         <InputElement
           name="price"

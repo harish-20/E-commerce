@@ -1,3 +1,4 @@
+const User = require('../model/user')
 const Product = require('../model/product')
 
 const getAllProducts = async (req, res) => {
@@ -71,8 +72,15 @@ const addProduct = async (req, res) => {
     })
     const result = await product.save()
 
-    res.status(200).send({ hasError: false, result })
+    const sellerResult = await User.findByIdAndUpdate(
+      sellerId,
+      { $push: { onSaleProducts: result } },
+      { new: true },
+    )
+
+    res.status(200).send({ hasError: false, result, sellerResult })
   } catch (err) {
+    console.log(err)
     res.status(400).send({
       hasError: true,
       error: err.message,

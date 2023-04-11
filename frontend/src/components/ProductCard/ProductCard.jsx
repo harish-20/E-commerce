@@ -9,7 +9,7 @@ const ProductCard = (props) => {
       </div>
       <div className={classes.details}>
         <p>{props.name}</p>
-        <h4>${props.price}</h4>
+        <h4>&#8377;{props.price}</h4>
       </div>
     </div>
   )

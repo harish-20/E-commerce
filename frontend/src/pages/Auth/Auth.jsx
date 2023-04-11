@@ -6,7 +6,11 @@ import Button from '../../components/Button/Button'
 
 import classes from './Auth.module.css'
 import { currentUserActions } from '../../redux/slices/currentUser'
+import { useNavigate } from 'react-router-dom'
 const Auth = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
   const [isSignUp, setisSignUp] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
@@ -15,7 +19,6 @@ const Auth = () => {
     isSeller: null,
     password: '',
   })
-  const dispatch = useDispatch()
 
   const currentState = isSignUp ? 'Sign Up' : 'Log In'
 
@@ -69,7 +72,7 @@ const Auth = () => {
         } else {
           const { user, token } = result.data
           dispatch(currentUserActions.setUser({ user, token }))
-          console.log(result.data)
+          navigate('/')
         }
       } else {
         alert('Input fields should not be empty')

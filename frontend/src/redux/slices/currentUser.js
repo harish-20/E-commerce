@@ -14,8 +14,9 @@ const currentUserSlice = createSlice({
       localStorage.setItem('userInfo', JSON.stringify(action.payload))
       return state
     },
-    resetUser() {
+    resetUser(state, action) {
       state = initialState
+      return state
     },
   },
 })

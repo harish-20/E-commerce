@@ -1,0 +1,26 @@
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.user-info div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+}
+
+.img-container {
+  height: 7rem;
+  width: 7rem;
+  background-color: var(--gray);
+  border-radius: 50%;
+}
+
+.img-container img {
+  height: 60%;
+}

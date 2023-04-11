@@ -3,14 +3,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import Icon from '../Icon/Icon'
+import Button from '../Button/Button'
+
+import { currentUserActions } from '../../redux/slices/currentUser'
 
 import logo from '../../assets/logo.svg'
 import profile from '../../assets/profile.svg'
 import cart from '../../assets/cart.svg'
 
 import classes from './Header.module.css'
-import Button from '../Button/Button'
-import { currentUserActions } from '../../redux/slices/currentUser'
 const Header = () => {
   const currentUser = useSelector((state) => state.currentUser)
 
@@ -35,8 +36,12 @@ const Header = () => {
         <input type="text" placeholder="Search Your Item" />
         {isLoggedIn ? (
           <>
-            <Icon src={profile} alt="profile" />
-            <Icon badge={0} src={cart} alt="cart" />
+            <Link to="/user">
+              <Icon src={profile} alt="profile" />
+            </Link>
+            <Link to="/cart">
+              <Icon badge={0} src={cart} alt="cart" />
+            </Link>
           </>
         ) : (
           <Link to="/login">

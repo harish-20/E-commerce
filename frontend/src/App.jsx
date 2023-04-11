@@ -5,6 +5,7 @@ import './App.css'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home/Home'
 import Auth from './pages/Auth/Auth'
+import User from './pages/User/User'
 import ProductCategory from './pages/ProductCategory/ProductCategory'
 import AddProduct from './pages/AddProduct/AddProduct'
 
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Auth />} />
+        <Route path="/user" element={<User />} />
         <Route path="/category/:category" element={<ProductCategory />} />
         <Route path="/addProduct" element={<AddProduct />} />
       </Routes>

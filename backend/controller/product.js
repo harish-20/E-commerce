@@ -15,6 +15,23 @@ const getAllProducts = async (req, res) => {
   }
 }
 
+const getProductById = async (req, res) => {
+  const { productId } = req.params
+
+  try {
+    const product = await Product.findById(productId)
+    if (product) {
+      res.status(200).send({ hasError: false, product })
+    }
+  } catch (err) {
+    res.status(400).send({
+      hasError: true,
+      error: err.message,
+      message: 'cannot get product',
+    })
+  }
+}
+
 const getProductsByCategory = async (req, res) => {
   const { category } = req.params
 
@@ -107,6 +124,7 @@ const removeProduct = async (req, res) => {
 
 module.exports = {
   getAllProducts,
+  getProductById,
   getProductsByCategory,
   getProductsBySeller,
   addProduct,

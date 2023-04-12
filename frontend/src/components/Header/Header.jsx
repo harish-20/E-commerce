@@ -14,6 +14,7 @@ import cart from '../../assets/cart.svg'
 import classes from './Header.module.css'
 const Header = () => {
   const currentUser = useSelector((state) => state.currentUser)
+  const totalCartItem = useSelector((state) => state.cart.cartItems.length)
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -40,7 +41,7 @@ const Header = () => {
               <Icon src={profile} alt="profile" />
             </Link>
             <Link to="/cart">
-              <Icon badge={0} src={cart} alt="cart" />
+              <Icon badge={totalCartItem} src={cart} alt="cart" />
             </Link>
           </>
         ) : (

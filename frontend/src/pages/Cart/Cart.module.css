@@ -1,0 +1,11 @@
+.cart {
+  display: flex;
+}
+
+.cart .cart-items {
+  width: 65%;
+}
+
+.cart .cart-invoice {
+  width: 35%;
+}

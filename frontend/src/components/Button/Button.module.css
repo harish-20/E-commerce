@@ -34,3 +34,8 @@
   background-color: var(--primary);
   color: white;
 }
+
+.btn:active,
+.secondary:active {
+  box-shadow: 2px 2px 5px 5px var(--primary-light);
+}

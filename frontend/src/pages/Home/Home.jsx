@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 
 import Category from '../../components/Category/Category'
 import CategoryHeading from '../../components/CategoryHeading/CategoryHeading'
@@ -15,6 +16,17 @@ import camcombo4 from '../../assets/camcombo4.png'
 import brand from '../../assets/brand.png'
 
 const Home = () => {
+  const [testProducts, setTestProducts] = useState([])
+
+  const getProducts = async () => {
+    const result = await axios.get('http://localhost:8080/product')
+
+    setTestProducts(result.data.products)
+  }
+  useEffect(() => {
+    getProducts()
+  }, [])
+
   const dummy = {
     images: [camcombo1, camcombo2, camcombo3, camcombo4],
     description:
@@ -85,6 +97,12 @@ const Home = () => {
         <BrandCard category="Camera" images={dummybrand2} />
       </CardContainer>
 
+      <CategoryHeading heading="all product" link="/category/camera" />
+      <CardContainer>
+        {testProducts.map((product) => (
+          <ProductCard key={product._id} {...product} />
+        ))}
+      </CardContainer>
       <BottomBanner />
     </div>
   )

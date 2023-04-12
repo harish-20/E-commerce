@@ -44,7 +44,9 @@ const Profile = (props) => {
         <p>{props.user.phoneNumber}</p>
       </div>
       <div>
-        <Button onClick={handleLogout}>Log Out</Button>
+        <Button type="sec" onClick={handleLogout}>
+          Log Out
+        </Button>
       </div>
     </div>
   )

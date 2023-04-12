@@ -6,11 +6,13 @@ const {
   getProductsBySeller,
   addProduct,
   removeProduct,
+  getProductById,
 } = require('../controller/product')
 
 const productRouter = express.Router()
 
 productRouter.get('/', getAllProducts)
+productRouter.get('/:productId', getProductById)
 productRouter.post('/addProduct', addProduct)
 productRouter.delete('/removeProduct', removeProduct)
 productRouter.get('/category/:category', getProductsByCategory)

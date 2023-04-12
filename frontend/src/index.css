@@ -4,6 +4,7 @@
   --gray: #f1f0f0;
   --dark: #454d4a;
   --primary: #58a0e2;
+  --primary-light: rgba(109, 216, 255, 0.778);
   --primary-dark: #5093d1;
 }
 
@@ -15,4 +16,9 @@
 
 body {
   font-family: 'Poppins', Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.centered {
+  text-align: center;
+  padding: 3rem;
 }

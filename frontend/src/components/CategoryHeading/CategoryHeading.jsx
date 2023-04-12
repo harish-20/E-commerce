@@ -7,7 +7,7 @@ const CategoryHeading = (props) => {
     <div className={classes.category}>
       <h2>{props.heading}</h2>
       {props.noViewAll !== true && (
-        <Link className={classes.viewall} to={'/'}>
+        <Link className={classes.viewall} to={props.link}>
           View All
         </Link>
       )}

@@ -1,0 +1,6 @@
+.cart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  margin: 2rem 3rem;
+}

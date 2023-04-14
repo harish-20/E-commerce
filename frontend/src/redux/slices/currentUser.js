@@ -15,6 +15,7 @@ const currentUserSlice = createSlice({
       return state
     },
     resetUser(state, action) {
+      localStorage.removeItem('userInfo')
       state = initialState
       return state
     },

@@ -29,7 +29,7 @@ const User = () => {
     if (user) {
       getUser()
     }
-  }, [currentUser.user])
+  }, [])
 
   if (!currentUser.user) {
     return <h1>Loading...</h1>

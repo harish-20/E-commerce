@@ -9,6 +9,11 @@ const Invoice = () => {
     (acc, item) => acc + item.quantity * item.price,
     0,
   )
+
+  if (cartItems.length === 0) {
+    return <h2 className="centered">No item in cart.</h2>
+  }
+
   return (
     <div>
       <table className={classes.invoice}>

@@ -9,3 +9,26 @@
 .cart .cart-invoice {
   width: 35%;
 }
+
+@media (max-width: 780px) {
+  .cart {
+    flex-direction: column;
+  }
+  .cart .cart-items {
+    width: 80%;
+    margin: auto;
+  }
+  .cart .cart-invoice {
+    width: 80%;
+    margin: auto;
+  }
+}
+
+@media (max-width: 460px) {
+  .cart .cart-items {
+    width: 100%;
+  }
+  .cart .cart-invoice {
+    width: 100%;
+  }
+}

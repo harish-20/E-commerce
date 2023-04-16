@@ -18,9 +18,9 @@ const PDP = () => {
   const getProduct = async () => {
     console.log(productId)
     const result = await axios.get(`http://localhost:8080/product/${productId}`)
+
     if (!result.data.hasError) {
       setProduct(result.data.product)
-      console.log(product)
     } else {
       alert('something went wrong')
     }

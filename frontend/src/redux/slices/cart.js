@@ -10,11 +10,8 @@ const cartSlice = createSlice({
   reducers: {
     loadCart(state, action) {
       state = JSON.parse(localStorage.getItem('cart')) || initialState
-
+      console.log(state)
       return state
-    },
-    storeCart(state, action) {
-      localStorage.setItem('cart', JSON.stringify(state))
     },
     addItem(state, action) {
       const existingItemIndex = state.cartItems.findIndex(
@@ -35,6 +32,8 @@ const cartSlice = createSlice({
           { ...action.payload, quantity: action.payload.quantity },
         ]
       }
+
+      localStorage.setItem('cart', JSON.stringify(state))
       return state
     },
     removeItem(state, action) {
@@ -54,6 +53,8 @@ const cartSlice = createSlice({
 
         state.cartItems[itemIndex] = updatedItem
       }
+
+      localStorage.setItem('cart', JSON.stringify(state))
       return state
     },
   },

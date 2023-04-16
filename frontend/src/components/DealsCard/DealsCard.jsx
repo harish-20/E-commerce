@@ -1,6 +1,7 @@
 import React from 'react'
 
 import classes from './DealsCard.module.css'
+import { Link } from 'react-router-dom'
 
 // Images
 // description
@@ -9,7 +10,7 @@ import classes from './DealsCard.module.css'
 
 function DealsCard(props) {
   return (
-    <div className={classes.card}>
+    <Link to={props.link} className={classes.card}>
       <div className={classes['image-container']}>
         <img src={props.images[0]} alt="product" />
       </div>
@@ -25,7 +26,7 @@ function DealsCard(props) {
           </div>
         ))}
       </div>
-    </div>
+    </Link>
   )
 }
 

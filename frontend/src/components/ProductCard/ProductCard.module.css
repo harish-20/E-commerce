@@ -27,15 +27,17 @@
 }
 
 .image-container img {
-  height: 150px;
+  max-height: 150px;
+  max-width: 250px;
 }
 
 .details {
   display: flex;
   justify-content: space-between;
+  margin-top: 1rem;
   width: 100%;
 }
 
 .details p {
-  font-size: 0.7rem;
+  font-size: 0.8rem;
 }

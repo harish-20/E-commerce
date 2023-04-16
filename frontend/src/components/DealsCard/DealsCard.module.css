@@ -9,6 +9,8 @@
   border-radius: 5px;
   margin-bottom: 2rem;
   transition: box-shadow ease-in 0.3s;
+  text-decoration: none;
+  color: rgb(39, 39, 39);
   cursor: pointer;
 }
 

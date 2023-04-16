@@ -12,6 +12,7 @@ import profile from '../../assets/profile.svg'
 import cart from '../../assets/cart.svg'
 
 import classes from './Header.module.css'
+import { cartActions } from '../../redux/slices/cart'
 const Header = () => {
   const currentUser = useSelector((state) => state.currentUser)
   const totalCartItem = useSelector((state) => state.cart.cartItems.length)
@@ -20,6 +21,7 @@ const Header = () => {
   useEffect(() => {
     const user = localStorage.getItem('userInfo')
 
+    dispatch(cartActions.loadCart())
     if (user) {
       const parsedUser = JSON.parse(user)
       dispatch(currentUserActions.setUser(parsedUser))

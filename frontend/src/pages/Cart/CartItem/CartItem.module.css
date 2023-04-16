@@ -40,7 +40,7 @@
   border-style: solid;
 }
 
-@media (max-width: 780px) {
+@media screen and (max-width: 780px) {
   .cart-item {
     flex-direction: column;
     gap: 1rem;

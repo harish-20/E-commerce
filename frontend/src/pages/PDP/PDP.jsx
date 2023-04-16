@@ -16,7 +16,6 @@ const PDP = () => {
   const dispatch = useDispatch()
 
   const getProduct = async () => {
-    console.log(productId)
     const result = await axios.get(`http://localhost:8080/product/${productId}`)
 
     if (!result.data.hasError) {
@@ -39,7 +38,7 @@ const PDP = () => {
   return (
     <div className={classes.pdp}>
       <div className={classes['pdp__title']}>
-        <div>
+        <div className={classes['pdp__title-price']}>
           <h1>
             {product.name}({product.brand})
           </h1>
@@ -47,6 +46,7 @@ const PDP = () => {
             <h2>&#8377;{product.price}</h2>
           </div>
         </div>
+
         <div className={classes['pdp__cart']}>
           <div className={classes['pdp__cart-actions']}>
             <Button
@@ -60,6 +60,7 @@ const PDP = () => {
               +
             </Button>
           </div>
+
           <div className={classes['pdp__addcart']}>
             <Button style={{ width: '100%' }} onClick={addToCart}>
               Add to cart
@@ -67,9 +68,11 @@ const PDP = () => {
           </div>
         </div>
       </div>
+
       <div className={classes['pdp__image']}>
         <img src={product.image} alt="product" />
       </div>
+
       <div className={classes['pdp__description']}>
         <h3>Description:</h3>
         <p>{product.description}</p>

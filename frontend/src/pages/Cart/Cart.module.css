@@ -10,7 +10,7 @@
   width: 35%;
 }
 
-@media (max-width: 780px) {
+@media screen and (max-width: 780px) {
   .cart {
     flex-direction: column;
   }
@@ -24,7 +24,7 @@
   }
 }
 
-@media (max-width: 460px) {
+@media screen and(max-width: 460px) {
   .cart .cart-items {
     width: 100%;
   }

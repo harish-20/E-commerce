@@ -6,6 +6,8 @@ import Category from '../../components/Category/Category'
 import ProductCard from '../../components/ProductCard/ProductCard'
 import CardContainer from '../../components/CardContainer/CardContainer'
 
+import classes from './ProductCategory.module.css'
+
 const categories = [
   {
     category: 'Laptop',
@@ -56,10 +58,19 @@ const ProductCategory = () => {
   }, [category])
 
   const categoryTitle = categories.find((element) => element.link === category)
+
   return (
-    <div>
+    <div className={classes['product-category']}>
       <Category />
+
       <h1 style={{ padding: '1rem' }}>{categoryTitle.category}</h1>
+
+      {products.length === 0 && (
+        <h2 className="centered">
+          Currently no products available in this category.
+        </h2>
+      )}
+
       <CardContainer>
         {products.map((product) => (
           <ProductCard key={product._id} {...product} />

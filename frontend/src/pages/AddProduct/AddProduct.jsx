@@ -6,17 +6,20 @@ import Button from '../../components/Button/Button'
 
 import classes from './AddProduct.module.css'
 import { useSelector } from 'react-redux'
+
+const initialFormData = {
+  name: '',
+  description: '',
+  image: '',
+  category: '',
+  price: '',
+  discount: '',
+  brand: '',
+}
+
 const AddProduct = () => {
   const currentUser = useSelector((state) => state.currentUser.user)
-  const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    image: '',
-    category: '',
-    price: '',
-    discount: '',
-    brand: '',
-  })
+  const [formData, setFormData] = useState(initialFormData)
 
   const handleChange = (event) => {
     setFormData((prev) => ({
@@ -52,7 +55,11 @@ const AddProduct = () => {
       'http://localhost:8080/product/addProduct',
       formatedFormData,
     )
-    console.log(result)
+    if (result.data.hasError) {
+      alert('Something went wrong')
+    } else {
+      setFormData(initialFormData)
+    }
   }
   return (
     <div className={classes['form-container']}>

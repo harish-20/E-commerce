@@ -1,6 +1,10 @@
 import axios from 'axios'
+// local : http://localhost:8080
+// production : https://e-commerce-gamma-dusky.vercel.app/
 
-const api = axios.create({ baseURL: 'http://localhost:8080' })
+const api = axios.create({
+  baseURL: 'https://e-commerce-ochre-psi.vercel.app/',
+})
 
 api.interceptors.request.use(
   (config) => {

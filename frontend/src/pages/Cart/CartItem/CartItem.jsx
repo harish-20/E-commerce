@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import classes from './CartItem.module.css'
 import { cartActions } from '../../../redux/slices/cart'
+import { toast } from 'react-toastify'
 const CartItem = (props) => {
   const dispatch = useDispatch()
 
@@ -10,6 +11,10 @@ const CartItem = (props) => {
     dispatch(cartActions.removeItem({ ...props, quantity: 1 }))
   }
   const handleIncrement = () => {
+    if (props.quantity >= 10) {
+      toast.info(`Maximum order amount reached.`)
+      return
+    }
     dispatch(cartActions.addItem({ ...props, quantity: 1 }))
   }
 

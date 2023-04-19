@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
-import axios from 'axios'
+import { useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 
 import InputElement from '../../components/InputElement/InputElement'
 import Button from '../../components/Button/Button'
 
+import { addProduct } from '../../API'
+
 import classes from './AddProduct.module.css'
-import { useSelector } from 'react-redux'
 
 const initialFormData = {
   name: '',
@@ -37,28 +39,34 @@ const AddProduct = () => {
       setFormData((prev) => ({ ...prev, image: fileReader.result }))
     }
     fileReader.onerror = () => {
-      alert('File uplode error...')
+      toast.error('File uplode error...')
     }
   }
 
   const handleSubmit = async (event) => {
     event.preventDefault()
+    if (!currentUser) {
+      toast.error('Login as seller to add product.')
+      return
+    }
+
     const formatedFormData = { ...formData, sellerId: currentUser._id }
     for (let key in formatedFormData) {
       if (formData[key] === '') {
-        alert('Fill all the input in the form')
+        toast.info('Fill all the input in the form')
         return
       }
     }
-
-    const result = await axios.post(
-      'http://localhost:8080/product/addProduct',
-      formatedFormData,
-    )
-    if (result.data.hasError) {
-      alert('Something went wrong')
-    } else {
-      setFormData(initialFormData)
+    try {
+      const result = await addProduct(formatedFormData)
+      if (result.data.hasError) {
+        toast.error('Something went wrong')
+      } else {
+        toast.success('Product added successfully.')
+        setFormData(initialFormData)
+      }
+    } catch (err) {
+      toast.error(err.message || 'File Upload Failed.')
     }
   }
   return (
@@ -106,7 +114,7 @@ const AddProduct = () => {
               --none--
             </option>
             <option value="laptop">Laptop</option>
-            <option value="accessories">Accesories</option>
+            <option value="accessories">Accessories</option>
             <option value="camera">Camera</option>
             <option value="tv">TV</option>
             <option value="hometheatre">Home Theatre</option>

@@ -29,6 +29,22 @@
   width: 90%;
 }
 
+.bounce {
+  animation: bounce 0.4s ease-in-out forwards;
+}
+
+@keyframes bounce {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.9);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
 @media screen and (max-width: 480px) {
   .header .logo {
     height: 40px;

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import axios from 'axios'
 
-import Category from '../../components/Category/Category'
+import CategoryLinks from '../../components/CategoryLinks/CategoryLinks'
 import ProductCard from '../../components/ProductCard/ProductCard'
 import CardContainer from '../../components/CardContainer/CardContainer'
+
+import { getProductsByCategory } from '../../API'
 
 import classes from './ProductCategory.module.css'
 
@@ -14,8 +15,8 @@ const categories = [
     link: 'laptop',
   },
   {
-    category: 'Accesories',
-    link: 'accesories',
+    category: 'Accessories',
+    link: 'accessories',
   },
   {
     category: 'Camera',
@@ -38,14 +39,13 @@ const categories = [
     link: 'storage',
   },
 ]
+
 const ProductCategory = () => {
   const [products, setProducts] = useState([])
   const { category } = useParams()
 
   const getProducts = async () => {
-    const { data } = await axios.get(
-      `http://localhost:8080/product/category/${category}`,
-    )
+    const { data } = await getProductsByCategory(category)
 
     if (data.hasError) {
       alert('No products found.')
@@ -61,7 +61,7 @@ const ProductCategory = () => {
 
   return (
     <div className={classes['product-category']}>
-      <Category />
+      <CategoryLinks />
 
       <h1 style={{ padding: '1rem' }}>{categoryTitle.category}</h1>
 

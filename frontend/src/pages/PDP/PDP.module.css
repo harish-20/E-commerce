@@ -9,7 +9,9 @@
   padding: 2rem 0;
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
 }
+
 .pdp__image {
   display: flex;
   align-items: center;
@@ -17,13 +19,22 @@
 }
 
 .pdp__image img {
+  min-width: 40vw;
   max-width: 50vw;
   object-fit: contain;
 }
 
 .pdp__description p {
-  margin-top: 1rem;
-  margin-left: 2rem;
+  margin: 1rem 0;
+  text-align: justify;
+}
+
+.pdp__description p::first-letter {
+  margin-left: 4rem;
+}
+
+.pdp__cart {
+  margin: 1rem 0;
 }
 
 .pdp__cart-actions {
@@ -42,6 +53,10 @@
 }
 
 @media screen and (max-width: 480px) {
+  .pdp {
+    margin: 0 1rem;
+  }
+
   .pdp__image img {
     max-width: 90vw;
     object-fit: contain;
@@ -61,6 +76,10 @@
 }
 
 @media screen and (max-width: 760px) {
+  .pdp {
+    margin: 0 2rem;
+  }
+
   .pdp__image img {
     max-width: 75vw;
     object-fit: contain;

@@ -1,8 +1,8 @@
-import Layout from './components/Layout/Layout'
-
-import './App.css'
-
 import { Route, Routes } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+
+import Layout from './components/Layout/Layout'
 import Home from './pages/Home/Home'
 import Auth from './pages/Auth/Auth'
 import User from './pages/User/User'
@@ -14,6 +14,7 @@ import Cart from './pages/Cart/Cart'
 function App() {
   return (
     <Layout>
+      <ToastContainer />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Auth />} />

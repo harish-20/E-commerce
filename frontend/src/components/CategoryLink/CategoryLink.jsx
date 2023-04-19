@@ -1,8 +1,8 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
-import classes from './CategoryItem.module.css'
-const CategoryItem = (props) => {
+import classes from './CategoryLink.module.css'
+const CategoryLink = (props) => {
   return (
     <NavLink
       to={'/category/' + props.link}
@@ -17,4 +17,4 @@ const CategoryItem = (props) => {
   )
 }
 
-export default CategoryItem
+export default CategoryLink

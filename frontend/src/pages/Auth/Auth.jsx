@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import axios from 'axios'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 import Button from '../../components/Button/Button'
 
-import classes from './Auth.module.css'
 import { currentUserActions } from '../../redux/slices/currentUser'
-import { useNavigate } from 'react-router-dom'
+
+import { userSignin, userSignup } from '../../API'
+
+import classes from './Auth.module.css'
 const Auth = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -49,33 +52,34 @@ const Auth = () => {
         isSeller !== null &&
         password !== ''
       ) {
-        const result = await axios.post(
-          'http://localhost:8080/user/signup',
-          formData,
-        )
+        const result = await userSignup(formData)
         if (result.data.hasError) {
-          alert('Signup failed')
+          toast.error('Signup failed')
         } else {
-          alert('Signup successfull.Now you can login.')
-        }
-      } else {
-        alert('Input fields should not be empty')
-      }
-    } else {
-      if (email !== '' && password !== '') {
-        const result = await axios.post('http://localhost:8080/user/signin', {
-          email,
-          password,
-        })
-        if (result.data.hasError) {
-          alert(result.message || 'Login in unsuccessfull')
-        } else {
-          const { user, token } = result.data
-          dispatch(currentUserActions.setUser({ user, token }))
+          toast.success('Signup successfull.Now you can login.')
           navigate('/')
         }
       } else {
-        alert('Input fields should not be empty')
+        toast.info('Input fields should not be empty')
+      }
+    } else {
+      if (email !== '' && password !== '') {
+        try {
+          const result = await userSignin({ email, password })
+
+          if (result.data.hasError) {
+            toast.error(result.data.message || 'Login in unsuccessfull')
+          } else {
+            const { user, token } = result.data
+            dispatch(currentUserActions.setUser({ user, token }))
+            toast.success('Login successfull.')
+            navigate('/')
+          }
+        } catch (err) {
+          toast.error('Invalid email and password.')
+        }
+      } else {
+        toast.info('Input fields should not be empty')
       }
     }
   }

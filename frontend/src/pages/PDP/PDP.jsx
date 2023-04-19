@@ -1,27 +1,47 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
 
-import axios from 'axios'
+import Button from '../../components/Button/Button'
+
+import { cartActions } from '../../redux/slices/cart'
+import { getProductsById } from '../../API'
 
 import classes from './PDP.module.css'
-import Button from '../../components/Button/Button'
-import { cartActions } from '../../redux/slices/cart'
 const PDP = () => {
-  const [product, setProduct] = useState(null)
-  const [quantity, setQuantity] = useState(0)
+  const currentUser = useSelector((state) => state.currentUser)
 
   const { productId } = useParams()
 
   const dispatch = useDispatch()
 
+  const [product, setProduct] = useState(null)
+  const [quantity, setQuantity] = useState(1)
+
+  const decreaseQuantity = () => {
+    if (quantity === 1) {
+      toast.info('You must have at least one product quantity to add cart')
+      return
+    }
+    setQuantity((prev) => (prev === 1 ? 1 : prev - 1))
+  }
+
+  const increaseQuantity = () => {
+    if (quantity >= 10) {
+      toast.info('Maximum quantity of product reached.')
+      return
+    }
+    setQuantity((prev) => prev + 1)
+  }
+
   const getProduct = async () => {
-    const result = await axios.get(`http://localhost:8080/product/${productId}`)
+    const result = await getProductsById(productId)
 
     if (!result.data.hasError) {
       setProduct(result.data.product)
     } else {
-      alert('something went wrong')
+      toast.error('something went wrong')
     }
   }
   useEffect(() => {
@@ -29,6 +49,10 @@ const PDP = () => {
   }, [])
 
   const addToCart = () => {
+    if (!currentUser.user) {
+      toast.info('Login to add this product to your cart.')
+      return
+    }
     dispatch(cartActions.addItem({ ...product, quantity: quantity }))
   }
 
@@ -49,14 +73,11 @@ const PDP = () => {
 
         <div className={classes['pdp__cart']}>
           <div className={classes['pdp__cart-actions']}>
-            <Button
-              type="sec"
-              onClick={() => setQuantity((prev) => (prev === 0 ? 0 : prev - 1))}
-            >
+            <Button type="sec" onClick={decreaseQuantity}>
               -
             </Button>
             <div className={classes['pdp__cart-total']}>{quantity}</div>
-            <Button type="sec" onClick={() => setQuantity((prev) => prev + 1)}>
+            <Button type="sec" onClick={increaseQuantity}>
               +
             </Button>
           </div>

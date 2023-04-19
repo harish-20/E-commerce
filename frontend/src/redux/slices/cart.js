@@ -6,12 +6,20 @@ const initialState = {
 
 const cartSlice = createSlice({
   name: 'Cart',
-  initialState,
+  initialState: initialState,
   reducers: {
     loadCart(state, action) {
-      state = JSON.parse(localStorage.getItem('cart')) || initialState
-      console.log(state)
-      return state
+      const storedState = localStorage.getItem('cart')
+      if (storedState) {
+        state = JSON.parse(storedState)
+        return state
+      }
+      console.log('hwlle', JSON.parse(storedState))
+      return initialState
+    },
+    resetCart(state, action) {
+      localStorage.removeItem('cart')
+      return initialState
     },
     addItem(state, action) {
       const existingItemIndex = state.cartItems.findIndex(

@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import Button from '../Button/Button'
 
 import { currentUserActions } from '../../redux/slices/currentUser'
+import { cartActions } from '../../redux/slices/cart'
 
 import profile from '../../assets/profile.svg'
 
@@ -15,6 +16,7 @@ const Profile = (props) => {
 
   const handleLogout = () => {
     dispatch(currentUserActions.resetUser())
+    dispatch(cartActions.resetCart())
     navigate('/')
   }
 

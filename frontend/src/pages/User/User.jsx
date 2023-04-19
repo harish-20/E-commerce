@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -11,6 +10,7 @@ import Button from '../../components/Button/Button'
 import { currentUserActions } from '../../redux/slices/currentUser'
 
 import classes from './User.module.css'
+import { getUserById } from '../../API'
 
 const User = () => {
   const currentUser = useSelector((state) => state.currentUser)
@@ -20,9 +20,8 @@ const User = () => {
     const user = currentUser.user
 
     const getUser = async () => {
-      const result = await axios.post('http://localhost:8080/user/getUser', {
-        _id: user._id,
-      })
+      const result = await getUserById(user._id)
+
       const updatedUser = { ...currentUser, user: result.data.user }
       dispatch(currentUserActions.setUser(updatedUser))
     }
@@ -46,6 +45,9 @@ const User = () => {
               <Button>Add Product</Button>
             </Link>
           </div>
+          {currentUser.user.onSaleProducts.length === 0 && (
+            <h3 className="centered">No Product is on sale. Add some</h3>
+          )}
           <CardContainer>
             {currentUser.user.onSaleProducts.map((product) => (
               <ProductCard key={product._id} {...product} />

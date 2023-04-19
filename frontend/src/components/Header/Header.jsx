@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -6,18 +6,23 @@ import Icon from '../Icon/Icon'
 import Button from '../Button/Button'
 
 import { currentUserActions } from '../../redux/slices/currentUser'
+import { cartActions } from '../../redux/slices/cart'
 
 import logo from '../../assets/logo.svg'
 import profile from '../../assets/profile.svg'
 import cart from '../../assets/cart.svg'
 
 import classes from './Header.module.css'
-import { cartActions } from '../../redux/slices/cart'
+
 const Header = () => {
   const currentUser = useSelector((state) => state.currentUser)
   const totalCartItem = useSelector((state) => state.cart.cartItems.length)
 
   const dispatch = useDispatch()
+
+  const [animateBouce, setAnimateBounce] = useState(false)
+  const animateRef = useRef(null)
+
   useEffect(() => {
     const user = localStorage.getItem('userInfo')
 
@@ -27,6 +32,19 @@ const Header = () => {
       dispatch(currentUserActions.setUser(parsedUser))
     }
   }, [])
+
+  useEffect(() => {
+    setTimeout(() => setAnimateBounce(false), 1000)
+
+    return () => {
+      if (!animateRef.current) {
+        animateRef.current = true
+      } else {
+        setAnimateBounce(true)
+      }
+    }
+  }, [totalCartItem])
+
   const isLoggedIn = !!currentUser.user
 
   return (
@@ -43,7 +61,12 @@ const Header = () => {
               <Icon src={profile} alt="profile" />
             </Link>
             <Link to="/cart">
-              <Icon badge={totalCartItem} src={cart} alt="cart" />
+              <Icon
+                badge={totalCartItem}
+                badgeClass={animateBouce ? classes.bounce : ''}
+                src={cart}
+                alt="cart"
+              />
             </Link>
           </>
         ) : (

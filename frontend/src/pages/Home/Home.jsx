@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
 
-import Category from '../../components/Category/Category'
-import CategoryHeading from '../../components/CategoryHeading/CategoryHeading'
 import CardContainer from '../../components/CardContainer/CardContainer'
+import ProductsContainer from '../../components/ProductsContainer/ProductsContainer'
+import CategoryLinks from '../../components/CategoryLinks/CategoryLinks'
 import DealsCard from '../../components/DealsCard/DealsCard'
 import BrandCard from '../../components/BrandCard/BrandCard'
+import CategoryHeading from '../../components/CategoryHeading/CategoryHeading'
 import BottomBanner from '../../components/BottomBanner/BottomBanner'
 
 import camcombo1 from '../../assets/camcombo1.png'
@@ -22,7 +22,8 @@ import laptopcombo3 from '../../assets/laptopcombo3.png'
 import laptopcombo4 from '../../assets/laptopcombo4.png'
 
 import brand from '../../assets/brand.png'
-import ProductsContainer from '../../components/ProductsContainer/ProductsContainer'
+
+import { getProductsByCategory } from '../../API'
 
 const comboOfferItems = [
   {
@@ -71,13 +72,9 @@ const Home = () => {
   })
 
   const getProducts = async () => {
-    const cameraList = await axios.get(
-      'http://localhost:8080/product/category/camera',
-    )
-    const tvList = await axios.get('http://localhost:8080/product/category/tv')
-    const laptopList = await axios.get(
-      'http://localhost:8080/product/category/laptop',
-    )
+    const cameraList = await getProductsByCategory('camera')
+    const tvList = await getProductsByCategory('tv')
+    const laptopList = await getProductsByCategory('laptop')
 
     const getFirstFourItems = (response) => {
       const products = response.data.products
@@ -105,7 +102,7 @@ const Home = () => {
 
   return (
     <div>
-      <Category />
+      <CategoryLinks />
       <CategoryHeading heading="Combo Offer" noViewAll />
       <CardContainer>
         {comboOfferItems.map((item) => (

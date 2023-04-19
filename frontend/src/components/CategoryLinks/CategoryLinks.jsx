@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import CategoryLink from '../CategoryLink/CategoryLink'
+
 import laptop from '../../assets/laptop.png'
 import accesories from '../../assets/accesories.png'
 import camera from '../../assets/camera.png'
@@ -8,53 +10,51 @@ import storage from '../../assets/storage.png'
 import headphone from '../../assets/headphones.png'
 import hometheatre from '../../assets/hometheatre.png'
 
-import CategoryItem from '../CategoryItem/CategoryItem'
+import classes from './CategoryLinks.module.css'
 
-import classes from './Category.module.css'
+const categories = [
+  {
+    category: 'Laptop',
+    image: laptop,
+    link: 'laptop',
+  },
+  {
+    category: 'Accesories',
+    image: accesories,
+    link: 'accessories',
+  },
+  {
+    category: 'Camera',
+    image: camera,
+    link: 'camera',
+  },
+  {
+    category: 'TV',
+    image: tv,
+    link: 'tv',
+  },
+  {
+    category: 'Home Theatre',
+    image: hometheatre,
+    link: 'hometheatre',
+  },
+  {
+    category: 'Headphone',
+    image: headphone,
+    link: 'headphone',
+  },
+  {
+    category: 'Storage',
+    image: storage,
+    link: 'storage',
+  },
+]
 
-const Category = () => {
+const CategoryLinks = () => {
   const [isOpen, setIsOpen] = useState(false)
 
-  const categories = [
-    {
-      category: 'Laptop',
-      image: laptop,
-      link: 'laptop',
-    },
-    {
-      category: 'Accesories',
-      image: accesories,
-      link: 'accesories',
-    },
-    {
-      category: 'Camera',
-      image: camera,
-      link: 'camera',
-    },
-    {
-      category: 'TV',
-      image: tv,
-      link: 'tv',
-    },
-    {
-      category: 'Home Theatre',
-      image: hometheatre,
-      link: 'hometheatre',
-    },
-    {
-      category: 'Headphone',
-      image: headphone,
-      link: 'headphone',
-    },
-    {
-      category: 'Storage',
-      image: storage,
-      link: 'storage',
-    },
-  ]
-
-  const categoriesList = categories.map((category) => (
-    <CategoryItem
+  const categoryLinks = categories.map((category) => (
+    <CategoryLink
       onClose={setIsOpen}
       key={category.category}
       category={category.category}
@@ -65,7 +65,7 @@ const Category = () => {
 
   return (
     <>
-      <div className={classes.category}>{categoriesList}</div>
+      <div className={classes.category}>{categoryLinks}</div>
       <div className={classes['sm-category']}>
         <div className={classes.actions}>
           <div
@@ -82,7 +82,7 @@ const Category = () => {
           className={classes['sm-category__items']}
           style={{ transform: `translateX(${isOpen ? '0' : '-100%'})` }}
         >
-          {categoriesList}
+          {categoryLinks}
         </div>
         {isOpen && (
           <div
@@ -95,4 +95,4 @@ const Category = () => {
   )
 }
 
-export default Category
+export default CategoryLinks

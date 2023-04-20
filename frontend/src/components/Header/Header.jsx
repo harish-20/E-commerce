@@ -34,12 +34,13 @@ const Header = () => {
   }, [])
 
   useEffect(() => {
+    if (!animateRef.current) {
+      animateRef.current = true
+    }
     setTimeout(() => setAnimateBounce(false), 1000)
 
     return () => {
-      if (!animateRef.current) {
-        animateRef.current = true
-      } else {
+      if (animateRef.current) {
         setAnimateBounce(true)
       }
     }

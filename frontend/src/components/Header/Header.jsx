@@ -34,14 +34,14 @@ const Header = () => {
   }, [])
 
   useEffect(() => {
-    if (!animateRef.current) {
-      animateRef.current = true
+    if (animateRef.current) {
+      setAnimateBounce(true)
     }
     setTimeout(() => setAnimateBounce(false), 1000)
 
     return () => {
-      if (animateRef.current) {
-        setAnimateBounce(true)
+      if (!animateRef.current) {
+        animateRef.current = true
       }
     }
   }, [totalCartItem])

@@ -14,7 +14,7 @@ const cartSlice = createSlice({
         state = JSON.parse(storedState)
         return state
       }
-      console.log('hwlle', JSON.parse(storedState))
+
       return initialState
     },
     resetCart(state, action) {

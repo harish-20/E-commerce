@@ -1,9 +1,9 @@
 import axios from 'axios'
 // local : http://localhost:8080
-// production : https://e-commerce-gamma-dusky.vercel.app/
+// production : https://ecommerce-jrwd.onrender.com
 
 const api = axios.create({
-  baseURL: 'https://e-commerce-ochre-psi.vercel.app/',
+  baseURL: 'https://ecommerce-jrwd.onrender.com',
 })
 
 api.interceptors.request.use(

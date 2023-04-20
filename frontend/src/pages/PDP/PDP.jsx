@@ -4,11 +4,14 @@ import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import Button from '../../components/Button/Button'
+import ProductsContainer from '../../components/ProductsContainer/ProductsContainer'
 
 import { cartActions } from '../../redux/slices/cart'
-import { getProductsById } from '../../API'
+
+import { getProductsByCategory, getProductsById } from '../../API'
 
 import classes from './PDP.module.css'
+
 const PDP = () => {
   const currentUser = useSelector((state) => state.currentUser)
 
@@ -18,6 +21,7 @@ const PDP = () => {
 
   const [product, setProduct] = useState(null)
   const [quantity, setQuantity] = useState(1)
+  const [relatedProducts, setRelatedProducts] = useState([])
 
   const decreaseQuantity = () => {
     if (quantity === 1) {
@@ -35,15 +39,29 @@ const PDP = () => {
     setQuantity((prev) => prev + 1)
   }
 
+  const getRelatedProducts = async (category) => {
+    const result = await getProductsByCategory(category)
+    console.log(result)
+
+    if (result.data.products) {
+      const filteredProduct = result.data.products.filter(
+        (product) => product._id !== productId,
+      )
+      setRelatedProducts(filteredProduct.slice(0, 4))
+    }
+  }
+
   const getProduct = async () => {
     const result = await getProductsById(productId)
 
     if (!result.data.hasError) {
       setProduct(result.data.product)
+      getRelatedProducts(result.data.product.category)
     } else {
       toast.error('something went wrong')
     }
   }
+
   useEffect(() => {
     getProduct()
   }, [])
@@ -57,7 +75,7 @@ const PDP = () => {
   }
 
   if (!product) {
-    return <h1>Loading...</h1>
+    return <h1 className="centered">Loading...</h1>
   }
   return (
     <div className={classes.pdp}>
@@ -98,6 +116,15 @@ const PDP = () => {
         <h3>Description:</h3>
         <p>{product.description}</p>
       </div>
+
+      <ProductsContainer
+        products={relatedProducts}
+        heading="Related Products"
+        link={`category/${product.category}`}
+      />
+      {!relatedProducts.length && (
+        <h2 className="centered">No Related Products</h2>
+      )}
     </div>
   )
 }

@@ -21,7 +21,22 @@ import laptopcombo2 from '../../assets/laptopcombo2.png'
 import laptopcombo3 from '../../assets/laptopcombo3.png'
 import laptopcombo4 from '../../assets/laptopcombo4.png'
 
-import brand from '../../assets/brand.png'
+import speakerbrand1 from '../../assets/speakerbrand1.png'
+import speakerbrand2 from '../../assets/speakerbrand2.png'
+import speakerbrand3 from '../../assets/speakerbrand3.png'
+import speakerbrand4 from '../../assets/speakerbrand4.png'
+import storagebrand1 from '../../assets/storagebrand1.png'
+import storagebrand2 from '../../assets/storagebrand2.png'
+import storagebrand3 from '../../assets/storagebrand3.png'
+import storagebrand4 from '../../assets/storagebrand4.png'
+import laptopbrand1 from '../../assets/laptopbrand1.png'
+import laptopbrand2 from '../../assets/laptopbrand2.png'
+import laptopbrand3 from '../../assets/laptopbrand3.png'
+import laptopbrand4 from '../../assets/laptopbrand4.png'
+import tvbrand1 from '../../assets/tvbrand1.png'
+import tvbrand2 from '../../assets/tvbrand2.png'
+import tvbrand3 from '../../assets/tvbrand3.png'
+import tvbrand4 from '../../assets/tvbrand4.png'
 
 import { getProductsByCategory } from '../../API'
 
@@ -64,6 +79,14 @@ const comboOfferItems = [
   },
 ]
 
+const brand1 = [speakerbrand1, speakerbrand2, speakerbrand3, speakerbrand4]
+
+const brand2 = [storagebrand1, storagebrand2, storagebrand3, storagebrand4]
+
+const brand3 = [laptopbrand1, laptopbrand2, laptopbrand3, laptopbrand4]
+
+const brand4 = [tvbrand1, tvbrand2, tvbrand3, tvbrand4]
+
 const Home = () => {
   const [displayProducts, setDisplayProducts] = useState({
     cameraList: [],
@@ -96,10 +119,6 @@ const Home = () => {
     getProducts()
   }, [])
 
-  const dummybrand = [brand, brand, brand, brand]
-
-  const dummybrand2 = [camcombo1, camcombo2, camcombo3, camcombo4]
-
   return (
     <div>
       <CategoryLinks />
@@ -111,12 +130,14 @@ const Home = () => {
       </CardContainer>
 
       <ProductsContainer
+        loading
         heading="Camera"
         link="/category/camera"
         products={displayProducts.cameraList}
       />
 
       <ProductsContainer
+        loading
         heading="TV"
         link="/category/tv"
         products={displayProducts.tvList}
@@ -124,13 +145,14 @@ const Home = () => {
 
       <CategoryHeading heading="Shop By Brand" noViewAll />
       <CardContainer>
-        <BrandCard category="Speaker" images={dummybrand} />
-        <BrandCard category="Camera" images={dummybrand2} />
-        <BrandCard category="Speaker" images={dummybrand} />
-        <BrandCard category="Camera" images={dummybrand2} />
+        <BrandCard category="Speaker" images={brand1} />
+        <BrandCard category="Camera" images={brand2} />
+        <BrandCard category="Speaker" images={brand3} />
+        <BrandCard category="Camera" images={brand4} />
       </CardContainer>
 
       <ProductsContainer
+        loading
         heading="Laptop"
         link="/category/laptop"
         products={displayProducts.laptopList}

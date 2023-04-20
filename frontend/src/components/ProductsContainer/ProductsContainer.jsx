@@ -8,6 +8,9 @@ const ProductsContainer = (props) => {
   return (
     <>
       <CategoryHeading heading={props.heading} link={props.link} />
+      {props.products.length === 0 && props.loading && (
+        <h2 className="centered">Loading...</h2>
+      )}
       <CardContainer>
         {props.products.map((product) => (
           <ProductCard key={product._id} {...product} />

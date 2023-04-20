@@ -1,5 +1,6 @@
 .cart {
   display: flex;
+  margin: 2rem 0;
 }
 
 .cart .cart-items {

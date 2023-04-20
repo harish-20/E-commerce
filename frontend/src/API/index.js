@@ -3,7 +3,7 @@ import axios from 'axios'
 // production : https://ecommerce-jrwd.onrender.com
 
 const api = axios.create({
-  baseURL: 'https://ecommerce-jrwd.onrender.com',
+  baseURL: 'http://localhost:8080',
 })
 
 api.interceptors.request.use(
@@ -32,3 +32,5 @@ export const getProductsById = async (_id) => await api.get(`/product/${_id}`)
 
 export const getProductsByCategory = async (category) =>
   await api.get(`/product/category/${category}`)
+
+export const makePayment = async (data) => await api.post('/payment', data)

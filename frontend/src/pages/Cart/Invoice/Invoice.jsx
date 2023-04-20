@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 
 import classes from './Invoice.module.css'
+import { makePayment } from '../../../API'
 const Invoice = () => {
   const currentUser = useSelector((state) => state.currentUser.user)
   const cartItems = useSelector((state) => state.cart.cartItems)
@@ -12,10 +13,20 @@ const Invoice = () => {
     0,
   )
 
-  const paymentHandler = () => {
+  const paymentHandler = async () => {
     if (cartItems.length === 0) {
       toast.error('Add some item to checkout')
       return
+    }
+
+    const response = await makePayment({
+      orderBy: currentUser.name,
+      amount: totalAmount,
+    })
+
+    const { data } = response
+    if (data.hasError) {
+      toast.error(data.error)
     }
 
     var options = {
@@ -24,7 +35,7 @@ const Invoice = () => {
       currency: 'INR',
       name: 'Elecxo',
       description: 'Total Produucts',
-      order_id: 'order_IluGWxBm9U8zJ8',
+      order_id: data.order.id,
       prefill: {
         name: currentUser.name,
         email: currentUser.email,
@@ -42,11 +53,15 @@ const Invoice = () => {
     }
 
     const razorpay = new Razorpay(options)
-    razorpay.open()
-    razorpay.on('payment.failed', (response) => {
-      console.log(response)
+    try {
+      razorpay.open()
+      razorpay.on('payment.failed', (response) => {
+        console.log(response)
+      })
+    } catch (err) {
+      console.err(err)
       razorpay.close()
-    })
+    }
   }
 
   if (cartItems.length === 0) {

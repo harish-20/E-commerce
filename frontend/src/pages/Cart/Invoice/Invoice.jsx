@@ -45,6 +45,7 @@ const Invoice = () => {
     razorpay.open()
     razorpay.on('payment.failed', (response) => {
       console.log(response)
+      razorpay.close()
     })
   }
 

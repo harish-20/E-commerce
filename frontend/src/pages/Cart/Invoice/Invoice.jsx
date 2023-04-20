@@ -1,12 +1,15 @@
-import React, { useRef } from 'react'
-import { useSelector } from 'react-redux'
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 
 import classes from './Invoice.module.css'
 import { makePayment } from '../../../API'
+import { cartActions } from '../../../redux/slices/cart'
 const Invoice = () => {
   const currentUser = useSelector((state) => state.currentUser.user)
   const cartItems = useSelector((state) => state.cart.cartItems)
+
+  const dispatch = useDispatch()
 
   const totalAmount = cartItems.reduce(
     (acc, item) => acc + item.quantity * item.price,
@@ -30,7 +33,6 @@ const Invoice = () => {
     }
 
     var options = {
-      key: 'rzp_test_qzkbkoKqCTLxl7',
       amount: totalAmount,
       currency: 'INR',
       name: 'Elecxo',
@@ -48,7 +50,8 @@ const Invoice = () => {
         color: '#3399cc',
       },
       handler: (response) => {
-        console.log(response)
+        toast.success('Payment successfull')
+        dispatch(cartActions.resetCart())
       },
     }
 

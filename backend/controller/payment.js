@@ -2,7 +2,6 @@ require('dotenv').config()
 const Razorpay = require('razorpay')
 
 const makePayment = async (req, res) => {
-  console.log('payment')
   const { amount, orderBy } = req.body
   const instance = new Razorpay({
     key_id: process.env.RAZORID,

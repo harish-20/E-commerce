@@ -3,7 +3,7 @@ import axios from 'axios'
 // production : https://ecommerce-jrwd.onrender.com
 
 const api = axios.create({
-  baseURL: 'http://localhost:8080',
+  baseURL: 'https://ecommerce-jrwd.onrender.com',
 })
 
 api.interceptors.request.use(

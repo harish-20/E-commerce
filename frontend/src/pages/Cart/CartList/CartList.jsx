@@ -9,6 +9,7 @@ const CartList = () => {
   if (!cartItems.length) {
     return <h2 className="centered">No item in the cart. Add some.</h2>
   }
+
   return (
     <div className={classes['cart-list']}>
       {cartItems.map((item) => (
